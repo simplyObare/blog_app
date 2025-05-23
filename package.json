@@ -1,0 +1,29 @@
+{
+  "name": "blog_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:css": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simplyObare/blog_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/simplyObare/blog_app/issues"
+  },
+  "homepage": "https://github.com/simplyObare/blog_app#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.7",
+    "tailwindcss": "^4.1.7"
+  },
+  "devDependencies": {
+    "daisyui": "^5.0.37"
+  }
+}
