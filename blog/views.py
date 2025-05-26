@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Blog, Comment
 from django.shortcuts import get_object_or_404
+from .forms import CommentForm
 
 
 def home(request):
@@ -13,4 +14,17 @@ def home(request):
 
 def blog_detail(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
-    return render(request, "blog/blog_detail.html", {"blog": blog})
+    comments = blog.comments.all()
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog = blog
+            comment.save()
+            return redirect("blog_detail", pk=pk)
+    else:
+        form = CommentForm()
+
+    context = {"blog": blog, "form": form, "comments": comments}
+    return render(request, "blog/blog_detail.html", context)
