@@ -1,1 +1,77 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %} {% load static %}
+<!-- Banner Image -->
+<div class="relative w-full">
+  <img
+    src="{{ blog.banner.url }}"
+    alt="{{ blog.title }}"
+    class="w-full h-[450px] object-cover"
+  />
+
+  <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+    <div class="text-center text-pretty max-w-lg p-4">
+      <h2 class="text-white text-4xl font-bold">{{blog.title}}</h2>
+    </div>
+  </div>
+</div>
+
+<div>
+  <!-- Blog Content -->
+  <section class="container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg">
+    <h2
+      class="text-2xl sm:text-3xl md:text-3xl lg:text-3xl font-bold text-gray-800 mb-4"
+    >
+      {{blog.description}}
+    </h2>
+    <p class="text-gray-600">
+      Published on:
+      <span class="font-semibold">{{blog.created_at|date:"F d, Y"}}</span>
+    </p>
+
+    <div class="mt-4 text-gray-700 space-y-4">
+      {{ blog.content|linebreaks|safe }}
+    </div>
+
+    <!-- Like Button -->
+    <div class="mt-6">
+      <button
+        id="likeButton"
+        class="btn btn-outline btn-primary flex items-center space-x-2"
+      >
+        ❤️ <span id="likeCount">0</span> Likes
+      </button>
+    </div>
+  </section>
+
+  <!-- Comments Section -->
+  <section class="container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg">
+    <h3 class="text-xl font-bold text-gray-800">Comments</h3>
+
+    <!-- Example Comment -->
+    <div class="mt-4 space-y-4">
+      <div class="p-4 bg-gray-100 rounded-md">
+        <p class="font-semibold">Jane Doe</p>
+        <p class="text-gray-600">Great article! I learned a lot.</p>
+      </div>
+      <div class="p-4 bg-gray-100 rounded-md">
+        <p class="font-semibold">John Smith</p>
+        <p class="text-gray-600">Awesome! Love TailwindCSS.</p>
+      </div>
+    </div>
+
+    <!-- Add Comment Form -->
+    <form class="mt-6 space-y-4">
+      <input
+        type="text"
+        placeholder="Your Name"
+        class="input input-bordered w-full"
+      />
+      <textarea
+        placeholder="Your Comment"
+        class="textarea textarea-bordered w-full"
+      ></textarea>
+      <button type="submit" class="btn btn-primary">Post Comment</button>
+    </form>
+  </section>
+</div>
+
+{% endblock %}

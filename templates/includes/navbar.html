@@ -1,4 +1,4 @@
-<nav class="navbar px-4 bg-base-100 shadow-sm">
+<nav class="navbar bg-base-100 px-0 sm:px-4 lg:px-4 shadow-sm">
   <div class="flex-1">
     <a href="/" class="btn btn-ghost text-xl">
       <span>
@@ -8,7 +8,7 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="size-6 w-8 h-8"
+          class="w-8 h-8"
         >
           <path
             stroke-linecap="round"
@@ -20,27 +20,26 @@
       <p class="hidden sm:flex md:flex lg:flex">Gems of East Africa</p>
     </a>
   </div>
-  <div class="flex gap-2">
-    <div class="join hidden md:flex lg:flex">
-      <div>
+  <div class="flex-none">
+    <!-- Search Bar & Actions -->
+    <div class="flex items-center gap-2">
+      <!-- Search Bar for Larger Screens -->
+      <div class="join hidden md:flex lg:flex w-[20svw]">
         <div>
-          <input
-            class="input join-item input-bordered w-[20svw]"
-            placeholder="Search..."
-          />
+          <label class="input join-item">
+            <input type="text" placeholder="Search..." required />
+          </label>
         </div>
-      </div>
-
-      <div class="indicator">
-        <button class="btn join-item bg-primary text-primary-content">
+        <button class="btn bg-primary text-primary-content join-item">
           Search
         </button>
       </div>
-    </div>
 
-    <div class="block md:hidden lg:hidden">
-      <!-- Open the modal using ID.showModal() method -->
-      <button class="btn btn-ghost btn-circle" onclick="my_modal_1.showModal()">
+      <!-- Mobile Search Icon -->
+      <button
+        class="btn btn-ghost btn-circle md:hidden lg:hidden"
+        onclick="my_modal_1.showModal()"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5"
@@ -56,15 +55,17 @@
           />
         </svg>
       </button>
+
+      <!-- Search Modal for Mobile -->
       <dialog id="my_modal_1" class="modal">
         <div class="modal-box">
-          <h3 class="text-lg font-bold">Hello!</h3>
-          <p class="py-4">Press ESC key or click the button below to close</p>
+          <h3 class="text-lg font-bold">Search</h3>
+          <input
+            class="input input-bordered w-full"
+            placeholder="Type here..."
+          />
           <div class="modal-action">
-            <form method="dialog">
-              <!-- if there is a button in form, it will close the modal -->
-              <button class="btn">Close</button>
-            </form>
+            <button class="btn" onclick="my_modal_1.close()">Close</button>
           </div>
         </div>
       </dialog>

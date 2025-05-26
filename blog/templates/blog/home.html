@@ -5,7 +5,7 @@
     <div id="slide" class="carousel-item relative w-full">
       <img
         src="{{item.banner.url}}"
-        class="w-full h-[70svh] sm:h-[60svh] md:h-[80svh] lg:h-[85svh] object-cover"
+        class="w-screen h-[70svh] sm:h-[60svh] md:h-[80svh] lg:h-[85svh] object-cover"
         alt="{{item.title}}"
       />
       <div
@@ -18,8 +18,8 @@
             >
               {{item.title}}
             </h1>
-            <p class="mb-5">{{item.description}}</p>
-            <a href="#" class="btn btn-primary">
+            <p class="mb-5">{{item.description|truncatewords:40}}</p>
+            <a href="{% url 'blog_detail' item.pk %}" class="btn btn-primary">
               <p>Read More</p>
               <span>
                 <svg
@@ -53,7 +53,6 @@
     </div>
     {% endfor %}
   </div>
-
   <div class="mt-6">{% include "blog/partials/blog_list.html" %}</div>
 </div>
 {% endblock %}

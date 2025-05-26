@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from ckeditor.fields import RichTextField
 
 
 class CustomUser(AbstractUser):
@@ -10,7 +11,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     banner = models.ImageField(null=True, blank=True, default="media/default.png")
     description = models.TextField()
-    content = models.TextField()
+    content = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     likes = models.PositiveIntegerField(default=0)
 

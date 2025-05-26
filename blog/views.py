@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 
 
 def home(request):
-    blogs = Blog.objects.all()
+    blogs = Blog.objects.all().order_by("-created_at")
     carousel = Blog.objects.all().order_by("-id")[:4]
 
     context = {"blogs": blogs, "carousel": carousel}
@@ -12,5 +12,5 @@ def home(request):
 
 
 def blog_detail(request, pk):
-    blogs = get_object_or_404(Blog, pk=pk)
-    return render(request, "blog/blog_detail.html", {"blogs": blogs})
+    blog = get_object_or_404(Blog, pk=pk)
+    return render(request, "blog/blog_detail.html", {"blog": blog})
