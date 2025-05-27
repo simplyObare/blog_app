@@ -33,12 +33,15 @@
 
     <!-- Like Button -->
     <div class="mt-6">
-      <button
-        id="likeButton"
-        class="btn btn-outline btn-primary flex items-center space-x-2"
-      >
-        ❤️ <span id="likeCount">0</span> Likes
-      </button>
+      <form method="POST" action="{% url 'blog_like' blog.pk %}">
+        {% csrf_token %}
+        <button
+          id="likeButton"
+          class="btn btn-outline btn-primary flex items-center space-x-2"
+        >
+          ❤️ <span id="likeCount">{{blog.likes}}</span> Likes
+        </button>
+      </form>
     </div>
   </section>
 

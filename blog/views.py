@@ -28,3 +28,10 @@ def blog_detail(request, pk):
 
     context = {"blog": blog, "form": form, "comments": comments}
     return render(request, "blog/blog_detail.html", context)
+
+
+def blog_like(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    blog.likes += 1
+    blog.save()
+    return redirect("blog_detail", pk=pk)
