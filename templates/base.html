@@ -8,11 +8,11 @@
     <script src="{% static 'js/carousel.js' %}" differ></script>
     <title>My Blog</title>
   </head>
-  <body class="w-screen overflow-x-hidden">
+  <body class="w-screen overflow-x-hidden min-h-screen flex flex-col">
     <div>{% include "includes/navbar.html" %}</div>
-    <main class="grid place-items-center">
+    <main class="grid place-items-center flex-grow">
       {% block content %}{% endblock %}
     </main>
-    <div>{% include "includes/footer.html" %}</div>
+    <div class="flex-none">{% include "includes/footer.html" %}</div>
   </body>
 </html>

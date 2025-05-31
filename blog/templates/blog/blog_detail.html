@@ -1,95 +1,97 @@
-{% extends "base.html" %} {% block content %} {% load static %}
+{% extends "base.html" %} {% block content %}
 <!-- Banner Image -->
+{% load static %}
 <div class="relative w-full">
   <img
     src="{{ blog.banner.url }}"
     alt="{{ blog.title }}"
-    class="w-full h-[450px] object-cover"
+    class="w-screen h-[450px] object-cover"
   />
 
-  <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+  <div
+    class="absolute w-screen inset-0 flex items-center justify-center bg-black/40"
+  >
     <div class="text-center text-pretty max-w-lg p-4">
       <h2 class="text-white text-4xl font-bold">{{blog.title}}</h2>
     </div>
   </div>
 </div>
 
-<div>
-  <!-- Blog Content -->
-  <section class="container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg">
-    <h2
-      class="text-2xl sm:text-3xl md:text-3xl lg:text-3xl font-bold text-gray-800 mb-4"
-    >
-      {{blog.description}}
-    </h2>
-    <p class="text-gray-600">
-      Published on:
-      <span class="font-semibold">{{blog.created_at|date:"F d, Y"}}</span>
-    </p>
+<!-- Blog Content -->
+<section
+  class="container w-screen mx-auto my-10 p-6 bg-white rounded-lg shadow-lg"
+>
+  <h2
+    class="text-2xl sm:text-3xl md:text-3xl lg:text-3xl font-bold text-gray-800 mb-4"
+  >
+    {{blog.description}}
+  </h2>
+  <p class="text-gray-600">
+    Published on:
+    <span class="font-semibold">{{blog.created_at|date:"F d, Y"}}</span>
+  </p>
 
-    <div class="mt-4 text-gray-700 space-y-4">
-      {{ blog.content|linebreaks|safe }}
-    </div>
+  <div class="mt-4 text-gray-700 space-y-4">
+    {{ blog.content|linebreaks|safe }}
+  </div>
 
-    <!-- Like Button -->
-    <div class="mt-6">
-      <form method="POST" action="{% url 'blog_like' blog.pk %}">
-        {% csrf_token %}
-        <button
-          id="likeButton"
-          class="btn btn-outline btn-primary flex items-center space-x-2"
-        >
-          ❤️ <span id="likeCount">{{blog.likes}}</span> Likes
-        </button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Comments Section -->
-  <section class="container mx-auto my-10 p-6 bg-white rounded-lg shadow-lg">
-    <h3 class="text-xl font-bold text-gray-800">
-      Comments ({{comments.count}})
-    </h3>
-
-    <!-- Example Comment -->
-    <div
-      class="mt-4 overflow-hidden overflow-y-scroll max-h-60 flex flex-col gap-2 p-2 bg-gray-600 rounded-md"
-    >
-      {% if comments|length == 0 %}
-      <div class="p-4 bg-gray-100 rounded-md">
-        <p class="text-gray-600">No Comments Yet</p>
-      </div>
-      {% else %} {% for comment in comments %}
-      <div class="p-4 bg-gray-100 rounded-md">
-        <p class="font-semibold text-gray-600">{{comment.name}}</p>
-        <p class="text-gray-600">{{comment.body}}</p>
-        <small class="text-gray-600">{{comment.created_at}}</small>
-      </div>
-      {% endfor %} {% endif %}
-    </div>
-
-    <!-- Add Comment Form -->
-    <div class="mt-6 grid place-items-center">
-      {% load widget_tweaks %}
-      <form
-        method="POST"
-        class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+  <!-- Like Button -->
+  <div class="mt-6">
+    <form method="POST" action="{% url 'blog_like' blog.pk %}">
+      {% csrf_token %}
+      <button
+        id="likeButton"
+        class="btn btn-outline btn-primary flex items-center space-x-2"
       >
-        {% csrf_token %}
-        <legend class="fieldset-legend text-primary text-2xl">
-          Leave a comment
-        </legend>
+        ❤️ <span id="likeCount">{{blog.likes}}</span> Likes
+      </button>
+    </form>
+  </div>
+</section>
 
-        <div>{{ form.name.label_tag }} {{ form.name }}</div>
-        <div>{{ form.email.label_tag }} {{ form.email }}</div>
-        <div>{{ form.body.label_tag }} {{ form.body }}</div>
+<!-- Comments Section -->
+<section
+  class="container w-screen mx-auto my-10 p-6 bg-white rounded-lg shadow-lg"
+>
+  <h3 class="text-xl font-bold text-gray-800">Comments ({{comments.count}})</h3>
 
-        <button type="submit" class="btn btn-primary w-full mt-2">
-          Post Comment
-        </button>
-      </form>
+  <!-- Example Comment -->
+  <div
+    class="mt-4 overflow-hidden overflow-y-scroll max-h-60 flex flex-col gap-2 p-2 bg-gray-600 rounded-md"
+  >
+    {% if comments|length == 0 %}
+    <div class="p-4 bg-gray-100 rounded-md">
+      <p class="text-gray-600">No Comments Yet</p>
     </div>
-  </section>
-</div>
+    {% else %} {% for comment in comments %}
+    <div class="p-4 bg-gray-100 rounded-md">
+      <p class="font-semibold text-gray-600">{{comment.name}}</p>
+      <p class="text-gray-600">{{comment.body}}</p>
+      <small class="text-gray-600">{{comment.created_at}}</small>
+    </div>
+    {% endfor %} {% endif %}
+  </div>
 
+  <!-- Add Comment Form -->
+  <div class="mt-6 grid place-items-center">
+    {% load widget_tweaks %}
+    <form
+      method="POST"
+      class="fieldset bg-base-200 border-base-300 rounded-box border p-4"
+    >
+      {% csrf_token %}
+      <legend class="fieldset-legend text-primary text-2xl">
+        Leave a comment
+      </legend>
+
+      <div>{{ form.name.label_tag }} {{ form.name }}</div>
+      <div>{{ form.email.label_tag }} {{ form.email }}</div>
+      <div>{{ form.body.label_tag }} {{ form.body }}</div>
+
+      <button type="submit" class="btn btn-primary w-full mt-2">
+        Post Comment
+      </button>
+    </form>
+  </div>
+</section>
 {% endblock %}

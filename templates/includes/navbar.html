@@ -24,16 +24,20 @@
     <!-- Search Bar & Actions -->
     <div class="flex items-center gap-2">
       <!-- Search Bar for Larger Screens -->
-      <div class="join hidden md:flex lg:flex w-[20svw]">
+      <form
+        action='{% url "search" %}'
+        class="join hidden md:flex lg:flex w-[20svw]"
+      >
+        {% csrf_token %}
         <div>
           <label class="input join-item">
-            <input type="text" placeholder="Search..." required />
+            <input type="text" name="q" placeholder="Search..." required />
           </label>
         </div>
         <button class="btn bg-primary text-primary-content join-item">
           Search
         </button>
-      </div>
+      </form>
 
       <!-- Mobile Search Icon -->
       <button
@@ -59,11 +63,15 @@
       <!-- Search Modal for Mobile -->
       <dialog id="my_modal_1" class="modal">
         <div class="modal-box">
-          <h3 class="text-lg font-bold">Search</h3>
-          <input
-            class="input input-bordered w-full"
-            placeholder="Type here..."
-          />
+          <form action='{% url "search" %}'>
+            {% csrf_token %}
+            <h3 class="text-lg font-bold">Search</h3>
+            <input
+              class="input input-bordered w-full"
+              name="q"
+              placeholder="Type here..."
+            />
+          </form>
           <div class="modal-action">
             <button class="btn" onclick="my_modal_1.close()">Close</button>
           </div>

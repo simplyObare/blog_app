@@ -35,3 +35,14 @@ def blog_like(request, pk):
     blog.likes += 1
     blog.save()
     return redirect("blog_detail", pk=pk)
+
+
+def search(request):
+    query = request.GET.get("q")
+    if query:
+        results = Blog.objects.filter(title__icontains=query)
+    else:
+        results = Blog.objects.all()
+
+    context = {"results": results, "query": query}
+    return render(request, "blog/search.html", context)
